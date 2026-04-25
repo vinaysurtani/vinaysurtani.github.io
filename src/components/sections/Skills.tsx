@@ -1,3 +1,6 @@
+import { motion } from 'framer-motion'
+import { fadeUp, staggerContainer, staggerChild, inView } from '@/lib/motionVariants'
+
 const skillGroups = [
   {
     label: 'Languages',
@@ -37,13 +40,21 @@ export function Skills() {
   return (
     <section id="skills" className="py-24 px-6 bg-muted/30">
       <div className="mx-auto max-w-5xl">
-        <p className="font-mono text-xs tracking-widest text-muted-foreground uppercase mb-8">
+        <motion.p
+          className="font-mono text-xs tracking-widest text-muted-foreground uppercase mb-8"
+          variants={fadeUp}
+          {...inView}
+        >
           Skills
-        </p>
+        </motion.p>
 
-        <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <motion.div
+          className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+          variants={staggerContainer}
+          {...inView}
+        >
           {skillGroups.map(group => (
-            <div key={group.label}>
+            <motion.div key={group.label} variants={staggerChild}>
               <p className="text-xs font-mono text-muted-foreground mb-3 uppercase tracking-wider">
                 {group.label}
               </p>
@@ -57,9 +68,9 @@ export function Skills() {
                   </span>
                 ))}
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   )

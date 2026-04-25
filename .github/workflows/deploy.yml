@@ -24,6 +24,10 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - name: Fetch pinned repos
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/fetch-pinned-repos.mjs
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3
         with:

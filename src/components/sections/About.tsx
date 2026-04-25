@@ -1,4 +1,6 @@
 import { GraduationCap } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { fadeUp, staggerContainer, staggerChild, inView } from '@/lib/motionVariants'
 
 const education = [
   {
@@ -21,31 +23,42 @@ export function About() {
   return (
     <section id="about" className="py-24 px-6">
       <div className="mx-auto max-w-5xl">
-        <SectionLabel>About</SectionLabel>
-        <div className="mt-8 grid gap-12 md:grid-cols-2">
-          <div>
+        <motion.p
+          className="font-mono text-xs tracking-widest text-muted-foreground uppercase"
+          variants={fadeUp}
+          {...inView}
+        >
+          About
+        </motion.p>
+
+        <motion.div
+          className="mt-8 grid gap-12 md:grid-cols-2"
+          variants={staggerContainer}
+          {...inView}
+        >
+          <motion.div variants={staggerChild}>
             <h2 className="text-2xl font-semibold tracking-tight text-foreground mb-4">
-              I build things that think.
+              I build at the GenAI layer.
             </h2>
             <div className="space-y-4 text-muted-foreground leading-relaxed">
               <p>
-                I'm a software engineer and AI researcher with 4+ years of industry experience,
-                currently doing my master's at SDSU. My work spans autonomous agents, RAG systems,
-                and full-stack engineering.
+                I'm a software engineer with 4+ years of industry experience specializing in
+                GenAI and agentic systems, currently doing my master's in Computer Science at SDSU.
               </p>
               <p>
-                At the CARE Lab, I build agents that self-direct experiments and improve over time.
-                Before that, I spent 3 years at Cognizant as a Software Developer II, shipping
-                NL2SQL systems, ETL pipelines, and cloud infrastructure for Fortune 500 clients.
+                At the CARE Lab, I design and ship agentic pipelines — fine-tuned LLMs, autonomous
+                workflows, and multi-step orchestration across real tools and APIs. Before that,
+                I spent 3 years at Cognizant building NL2SQL systems, RAG pipelines, and LLM-powered
+                infrastructure for Fortune 500 clients.
               </p>
               <p>
-                I'm drawn to problems where AI meets real systems — where a clever architecture
-                makes something genuinely useful.
+                My focus is the full stack of GenAI: from the model and retrieval layer down to
+                the production infrastructure that makes it reliable.
               </p>
             </div>
-          </div>
+          </motion.div>
 
-          <div>
+          <motion.div variants={staggerChild}>
             <div className="flex items-center gap-2 mb-6 text-sm font-medium text-foreground">
               <GraduationCap size={16} className="text-muted-foreground" />
               Education
@@ -62,17 +75,9 @@ export function About() {
                 </div>
               ))}
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
-  )
-}
-
-function SectionLabel({ children }: { children: React.ReactNode }) {
-  return (
-    <p className="font-mono text-xs tracking-widest text-muted-foreground uppercase">
-      {children}
-    </p>
   )
 }

@@ -1,58 +1,97 @@
-import { ArrowDown, Mail, ExternalLink } from 'lucide-react'
+import { useEffect } from 'react'
+import { Plus, Mail, ExternalLink } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { renderCanvas, stopCanvas } from '@/components/ui/canvas'
 
 export function Hero() {
-  return (
-    <section className="flex min-h-screen flex-col items-center justify-center px-6 text-center">
-      <div className="max-w-2xl">
-        <p className="mb-4 font-mono text-xs tracking-widest text-muted-foreground uppercase">
-          Software Engineer · AI/ML Researcher
-        </p>
-        <h1 className="mb-6 text-5xl font-semibold tracking-tight text-foreground md:text-6xl">
-          Vinay Surtani
-        </h1>
-        <p className="mb-10 text-lg text-muted-foreground leading-relaxed">
-          Building intelligent systems at the intersection of AI and software engineering.
-          Currently pursuing my MS in Computer Science at{' '}
-          <span className="text-foreground font-medium">SDSU</span> and researching
-          autonomous RAG agents at the CARE Lab.
-        </p>
+  useEffect(() => {
+    renderCanvas()
+    return () => stopCanvas()
+  }, [])
 
-        <div className="flex items-center justify-center gap-4 mb-12">
-          <a
-            href="mailto:surtanivinay@gmail.com"
-            className="flex items-center gap-2 rounded-md bg-foreground px-5 py-2.5 text-sm font-medium text-background hover:bg-foreground/90 transition-colors"
-          >
-            <Mail size={15} />
-            Get in touch
-          </a>
-          <a
-            href="https://github.com/vinaysurtani"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 rounded-md border border-border px-5 py-2.5 text-sm font-medium text-foreground hover:bg-accent transition-colors"
-          >
-            <ExternalLink size={15} />
-            GitHub
-          </a>
-          <a
-            href="https://linkedin.com/in/vinay-surtani"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 rounded-md border border-border px-5 py-2.5 text-sm font-medium text-foreground hover:bg-accent transition-colors"
-          >
-            <ExternalLink size={15} />
-            LinkedIn
-          </a>
+  return (
+    <section id="home" className="relative min-h-screen overflow-hidden">
+      {/* Content */}
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 text-center">
+
+        {/* Badge */}
+        <div className="z-10 mb-6 mt-10 sm:justify-center md:mb-4 md:mt-20">
+          <div className="relative flex items-center whitespace-nowrap rounded-full border border-border bg-card px-3 py-1 text-xs leading-6 text-muted-foreground">
+            <span className="relative flex h-2 w-2 mr-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500 opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
+            </span>
+            Looking for Summer 2026 internships
+          </div>
         </div>
 
-        <a
-          href="#about"
-          className="inline-flex flex-col items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
-        >
-          <span>Scroll down</span>
-          <ArrowDown size={14} className="animate-bounce" />
-        </a>
+        {/* Bordered hero box */}
+        <div className="mb-8 mt-4 md:mt-6 px-2 w-full">
+          <div className="relative mx-auto h-full max-w-4xl border border-border p-6 [mask-image:radial-gradient(600rem_48rem_at_center,white,transparent)] md:px-12 md:py-16">
+            {/* Corner plus icons */}
+            <Plus
+              strokeWidth={2}
+              className="text-muted-foreground/50 absolute -left-3 -top-3 h-6 w-6"
+            />
+            <Plus
+              strokeWidth={2}
+              className="text-muted-foreground/50 absolute -bottom-3 -left-3 h-6 w-6"
+            />
+            <Plus
+              strokeWidth={2}
+              className="text-muted-foreground/50 absolute -right-3 -top-3 h-6 w-6"
+            />
+            <Plus
+              strokeWidth={2}
+              className="text-muted-foreground/50 absolute -bottom-3 -right-3 h-6 w-6"
+            />
+
+            <h1 className="select-none text-5xl font-semibold tracking-tight text-foreground md:text-7xl lg:text-8xl">
+              Vinay Surtani
+            </h1>
+          </div>
+        </div>
+
+        {/* Tagline */}
+        <p className="font-mono text-xs tracking-widest text-muted-foreground uppercase mb-4">
+          Software Engineer · GenAI &amp; Agentic Systems
+        </p>
+
+        {/* Bio */}
+        <p className="mx-auto mb-10 max-w-xl px-6 text-sm text-muted-foreground leading-relaxed md:text-base">
+          I design agentic systems: LLMs that orchestrate tools, make decisions, and run in
+          production without falling apart. Currently pursuing my MS in Computer Science at{' '}
+          <span className="text-foreground font-medium">SDSU</span>.
+        </p>
+
+        {/* CTA buttons */}
+        <div className="flex flex-wrap items-center justify-center gap-3">
+          <Button asChild size="lg">
+            <a href="mailto:surtanivinay@gmail.com">
+              <Mail size={15} className="mr-2" />
+              Get in touch
+            </a>
+          </Button>
+          <Button asChild variant="outline" size="lg">
+            <a href="https://github.com/vinaysurtani" target="_blank" rel="noopener noreferrer">
+              <ExternalLink size={15} className="mr-2" />
+              GitHub
+            </a>
+          </Button>
+          <Button asChild variant="outline" size="lg">
+            <a href="https://linkedin.com/in/vinay-surtani" target="_blank" rel="noopener noreferrer">
+              <ExternalLink size={15} className="mr-2" />
+              LinkedIn
+            </a>
+          </Button>
+        </div>
       </div>
+
+      {/* Canvas background — pointer-events-none so clicks pass through to content */}
+      <canvas
+        id="canvas"
+        className="pointer-events-none absolute inset-0 w-full h-full"
+      />
     </section>
   )
 }
