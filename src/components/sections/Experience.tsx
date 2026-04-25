@@ -1,27 +1,33 @@
+import { motion } from 'framer-motion'
+import { fadeUp, staggerContainer, staggerChild, inView } from '@/lib/motionVariants'
+
 const experiences = [
   {
     company: 'San Diego State University',
-    role: 'Research Assistant — CARE Lab',
+    role: 'Research Assistant, CARE Lab',
     period: 'Oct 2025 – Present',
     location: 'San Diego, CA',
     bullets: [
-      'Built autonomous RAG agent with MCP-style tools that self-directed experiments, improving paraphrase hit rate from 85.4% to 91.7%.',
-      'Diagnosed dimensionality collapse in 384-dim MiniLM where queries became indistinguishable vectors; migrated to 768-dim MPNet.',
-      'Analyzed retrieval failure modes using VLM heatmap analysis to guide agent hypothesis generation.',
       'Automated clinic patient outreach via ElevenLabs and Twilio, handling calls, feedback collection, and escalation end-to-end.',
+      'Built autonomous RAG agent with MCP-style tools that self-directed experiments, improving paraphrase hit rate 85.4% to 91.7%.',
+      'Diagnosed dimensionality collapse in 384-dim MiniLM where queries became indistinguishable vectors, migrated to 768-dim MPNet.',
+      'Analyzed retrieval failure modes using VLM heatmap analysis to guide agent hypothesis generation across experiments.',
     ],
   },
   {
     company: 'Cognizant Technology Solutions',
-    role: 'Software Developer II — Data for Consumer Goods',
+    role: 'Software Developer II — Data & AI Platform (Consumer Packaged Goods)',
     period: 'Aug 2022 – Aug 2025',
     location: 'Pune, India',
     bullets: [
-      'Built an NL2SQL system on Amazon Redshift translating natural language to SQL using Amazon Bedrock with schema-aware retrieval.',
+      'Developed NL2SQL system across heterogeneous enterprise warehouses processing tens of TBs with dialect-aware SQL generation.',
       'Engineered schema enrichment pipeline auto-generating metadata via LLM over 500+ tables with join mappings for query grounding.',
-      'Built hybrid dense-sparse retrieval over enriched schema with role-based filtering at vector store level.',
-      'Engineered automated ETL pipelines for SAP migrations, reducing data prep time from 2 days to 3 hours across 15+ projects.',
-      'Streamlined pipeline deployments with AWS Lambda + Docker, cutting release cycles from weekly to daily with zero downtime.',
+      'Constructed hybrid dense-sparse retrieval over enriched schema with role-based filtering at vector store level to block access.',
+      'Designed intent classifier with Amazon Bedrock, ambiguity detection and clarification loop to resolve query intent pre-execution.',
+      'Architected Python workflow orchestrator with dependency graphs and retries, managing 30+ workflows, improving reliability to 98%.',
+      'Streamlined automated ETL pipelines for SAP migrations, reducing data prep time from 2 days to 3 hours across 15+ projects.',
+      'Established reusable validation framework deployed across 10+ domains, standardizing migration quality for $5M+ projects.',
+      'Accelerated pipeline deployments with AWS Lambda + Docker, cutting release cycles from weekly to daily with zero downtime.',
     ],
   },
   {
@@ -41,13 +47,25 @@ export function Experience() {
   return (
     <section id="experience" className="py-24 px-6 bg-muted/30">
       <div className="mx-auto max-w-5xl">
-        <p className="font-mono text-xs tracking-widest text-muted-foreground uppercase mb-8">
+        <motion.p
+          className="font-mono text-xs tracking-widest text-muted-foreground uppercase mb-8"
+          variants={fadeUp}
+          {...inView}
+        >
           Experience
-        </p>
+        </motion.p>
 
-        <div className="space-y-12">
+        <motion.div
+          className="space-y-12"
+          variants={staggerContainer}
+          {...inView}
+        >
           {experiences.map(exp => (
-            <div key={exp.role} className="grid md:grid-cols-[200px_1fr] gap-4 md:gap-8">
+            <motion.div
+              key={exp.role}
+              className="grid md:grid-cols-[200px_1fr] gap-4 md:gap-8"
+              variants={staggerChild}
+            >
               <div className="md:text-right">
                 <p className="text-xs font-mono text-muted-foreground">{exp.period}</p>
                 <p className="text-xs text-muted-foreground mt-1">{exp.location}</p>
@@ -64,9 +82,9 @@ export function Experience() {
                   ))}
                 </ul>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   )
